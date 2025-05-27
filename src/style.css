@@ -3,3 +3,24 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.header {
+    background-color: navy;
+    display: flex;
+    padding: 20px;
+}
+
+.header-text {
+    color: white;
+    font-weight: bold;
+    font-size: 3.5rem;
+}
+
+.add-project {
+    background-color: aqua;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: auto;
+}
