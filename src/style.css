@@ -2,22 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    line-height: 1.5;
 }
 
 .header {
-    background-color: navy;
+    background-color: #000080;
     display: flex;
     padding: 20px;
 }
 
 .header-text {
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     font-size: 3.5rem;
 }
 
 .add-project {
-    background-color: aqua;
+    background-color: #00ffff;
     padding: 15px 30px;
     border-radius: 10px;
     font-size: 1rem;
@@ -31,8 +32,8 @@
 }
 
 .projects-container {
-    background-color: lightgray;
-    height: 100vh;
+    background-color: #d3d3d3;
+    height: 100%;
     padding: 15px;
 }
 
@@ -52,15 +53,16 @@
     text-wrap: nowrap;
     padding-top: 10px;
 }
+
 .add-task {
     margin-left: auto;
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .delete-project {
-    background: darkred;
-    color: white;
+    background: #8b0000;
+    color: #ffffff;
     margin-left: 5px;
 }
 
@@ -71,5 +73,100 @@
 }
 
 .selected {
-    background-color: orange;
+    background-color: #ffa500;
+}
+
+.tasks-container {
+    padding: 15px;
+}
+
+.tasks-header {
+    font-weight: bold;
+    font-size: 1.9rem;
+}
+
+.no-tasks {
+    font-style: italic;
+    padding: 20px 0;
+    font-size: 1.5rem;
+}
+
+.tasks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.task-item {
+    background-color: #ffffe0;
+    padding: 15px 0;
+    font-size: 1.5rem;
+}
+
+.task-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.task-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 7px;
+}
+
+.task-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.task-text {
+    font-size: 0.9rem;
+}
+
+.task-duedate {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.task-complete-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.task-control-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.task-button {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    border-radius: 7px;
+}
+
+.delete {
+    background-color: #dc143c;
+    color: #ffffff;
+}
+
+.update {
+    background-color: #cfeb30;
+}
+
+.low {
+    border: 5px solid #008000;
+}
+
+.medium {
+    border: 5px solid #0000ff;
+}
+
+.high {
+    border: 5px solid #ff0000;
+}
+
+.complete {
+    text-decoration:line-through;
 }
