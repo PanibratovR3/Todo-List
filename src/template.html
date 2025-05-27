@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
     <title>Todo-List</title>
 </head>
     <body>
@@ -11,7 +12,7 @@
             <div class="header-text">
                 Todo-List
             </div>
-            <button class="add-project">
+            <button class="add-project-button">
                 + Add new project
             </button>
         </div>
@@ -165,6 +166,22 @@
                     </div>                              
                 </div>
             </div>
+        </div>
+        <div class="modal-dialog-add-project-container">
+            <dialog class="add-project-dialog">
+                <div class="add-project-header">Add new project</div>
+                <form method="dialog">
+                    <div class="add-project-row">
+                        <label for="project-name">Name:</label>
+                        <input type="text" name="" id="project-name" required/>
+                        <span class="non-empty-flag"></span>
+                        <span class="add-project-monitor"></span>
+                    </div>
+                    <div class="add-project-settings">
+                        <button type="button" class="add-project-submit-button">Add</button>
+                    </div>
+                </form>
+            </dialog>
         </div>
     </body>
 </html>
