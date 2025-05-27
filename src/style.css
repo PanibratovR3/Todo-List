@@ -47,13 +47,29 @@
 }
 
 .projects-text {
-    font-size: 1rem;
+    font-size: 1.9rem;
+    margin-right: 15px;
+    text-wrap: nowrap;
+    padding-top: 10px;
 }
-
 .add-task {
     margin-left: auto;
-    font-size: 1rem;
-    padding: 0 13px;
     background-color: black;
     color: white;
+}
+
+.delete-project {
+    background: darkred;
+    color: white;
+    margin-left: 5px;
+}
+
+.project-control{
+    padding: 5px;
+    font-size: 1.1rem;
+    text-wrap: nowrap;
+}
+
+.selected {
+    background-color: orange;
 }
