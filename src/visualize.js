@@ -1,4 +1,5 @@
 import { Control } from "./control.js";
+import { Task } from "./task.js";
 const DOMTodoList = (() => {
   const drawAllProjects = (projects) => {
     const projectsContainer = document.querySelector(".projects-list");
@@ -61,26 +62,30 @@ const DOMTodoList = (() => {
     if (event.target.parentNode.classList.contains("selected")) {
       console.log("Can add.");
       console.log("Add task");
+      const projectID = event.target.parentNode.getAttribute("data-project-id");
       const addNewTaskDialog = document.querySelector(".add-task-dialog");
       addNewTaskDialog.showModal();
       const addTaskSubmitButton = document.querySelector(
         ".add-task-submit-button"
       );
       addTaskSubmitButton.addEventListener("click", (event) => {
+        const titleValue = document.querySelector("#task-title").value;
         const descriptionValue = document.querySelector("#task-name").value;
         const dueDateValue = document.querySelector("#task-due-date").value;
         const priorityValue = document.querySelector("#task-priority").value;
         const notesValue = document.querySelector("#task-notes").value;
-        if (descriptionValue && dueDateValue && notesValue) {
+        if (titleValue && descriptionValue && dueDateValue && notesValue) {
           console.log("Adding...");
           const form = addNewTaskDialog.querySelector("form");
           form.reset();
           addNewTaskDialog.close();
+          console.log("Title: ", titleValue);
+          console.log("Description: ", descriptionValue);
+          console.log("Due date: ", dueDateValue);
+          console.log("Priority: ", priorityValue);
+          console.log("Notes: ", notesValue);
+          // const newTask = new Task()
         }
-        console.log("Description: ", descriptionValue);
-        console.log("Due date: ", dueDateValue);
-        console.log("Priority: ", priorityValue);
-        console.log("Notes: ", notesValue);
       });
     }
   };

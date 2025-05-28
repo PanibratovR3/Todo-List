@@ -37,7 +37,7 @@ input, select, textarea, button {
 
 .projects-container {
     background-color: #d3d3d3;
-    height: 150%;
+    height: 100vh;
     padding: 15px;
 }
 

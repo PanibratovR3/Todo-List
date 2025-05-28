@@ -31,6 +31,13 @@ const Control = (() => {
     currentStorage.splice(indexToDelete, 1);
     uploadToLocalStorage(currentStorage);
   };
+  const addTaskToProject = (projectId, task) => {
+    const indexToAdd = currentStorage.findIndex(
+      (project) => project.id === projectId
+    );
+    currentStorage[indexToAdd].tasks.push(task);
+    uploadToLocalStorage(currentStorage);
+  };
   return {
     addProjectToStorage,
     getStorage,
