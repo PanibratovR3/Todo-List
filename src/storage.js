@@ -5,7 +5,10 @@ function uploadToLocalStorage(storage) {
 }
 
 function downloadFromStorage() {
-  return JSON.parse(localStorage.getItem("todoStorage"));
+  const response = JSON.parse(localStorage.getItem("todoStorage"))
+    ? JSON.parse(localStorage.getItem("todoStorage"))
+    : primaryStorage;
+  return response;
 }
 
 export { primaryStorage, uploadToLocalStorage, downloadFromStorage };
