@@ -168,8 +168,19 @@ const DOMTodoList = (() => {
   };
   const deleteHandler = (event) => {
     event.stopPropagation();
-    const projectID = event.target.parentNode.getAttribute("data-project-id");
+    const projectItem = event.target.parentNode;
+    const projectID = projectItem.getAttribute("data-project-id");
     Control.deleteProject(projectID);
+    if (projectItem.classList.contains("selected")) {
+      document.querySelector("input[type='hidden']").value = "";
+      const tasksField = document.querySelector(".tasks-list");
+      if (tasksField.hasChildNodes()) {
+        while (tasksField.firstChild) {
+          const element = tasksField.firstChild;
+          tasksField.removeChild(element);
+        }
+      }
+    }
     drawAllProjects(Control.getStorage());
   };
   const addTaskHandler = (event) => {
