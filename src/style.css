@@ -181,7 +181,7 @@ input, select, textarea, button {
 
 .add-project-dialog {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 45%;
     background-color:gainsboro;
     padding: 25px;
@@ -248,8 +248,8 @@ textarea:valid + .non-empty-flag::after {
 
 .add-task-dialog {
     position: absolute;
-    top: 50%;
-    left: 30%;
+    top: 30%;
+    left: 45%;
     padding: 30px;
     background-color: wheat;
 }
