@@ -135,7 +135,7 @@ const DOMTodoList = (() => {
         taskElement.appendChild(taskCompleteRow);
         const inputCompleteLabel = document.createElement("label");
         inputCompleteLabel.setAttribute("for", "complete-task");
-        inputCompleteLabel.textContent = "Mark as complete: ";
+        inputCompleteLabel.textContent = "Mark as complete";
         taskCompleteRow.appendChild(inputCompleteLabel);
         inputCompleteCheckbox.addEventListener(
           "change",
