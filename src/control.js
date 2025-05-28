@@ -38,11 +38,23 @@ const Control = (() => {
     currentStorage[indexToAdd].tasks.push(task);
     uploadToLocalStorage(currentStorage);
   };
+  const setCompleteStateOfTask = (projectID, taskID, newState) => {
+    const projectIndex = currentStorage.findIndex(
+      (project) => project.id === projectID
+    );
+    const taskIndex = currentStorage[projectIndex].tasks.findIndex(
+      (task) => task.id === taskID
+    );
+    currentStorage[projectIndex].tasks[taskIndex].isCompleted = newState;
+    uploadToLocalStorage(currentStorage);
+  };
   return {
     addProjectToStorage,
     getStorage,
     setSelectedStateOfProject,
     deleteProject,
+    addTaskToProject,
+    setCompleteStateOfTask,
   };
 })();
 
