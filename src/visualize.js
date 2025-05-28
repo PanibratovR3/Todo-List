@@ -141,6 +141,15 @@ const DOMTodoList = (() => {
           "change",
           toggleCompleteStatusHandler
         );
+        taskElement.appendChild(taskCompleteRow);
+        const taskControlRow = document.createElement("div");
+        taskControlRow.classList.add("task-control-row");
+        const taskButtonDelete = document.createElement("button");
+        taskButtonDelete.classList.add("task-button");
+        taskButtonDelete.classList.add("delete");
+        taskButtonDelete.textContent = "Delete";
+        taskControlRow.appendChild(taskButtonDelete);
+        taskElement.appendChild(taskControlRow);
 
         return taskElement;
       });
@@ -167,7 +176,6 @@ const DOMTodoList = (() => {
     if (event.target.parentNode.classList.contains("selected")) {
       console.log("Can add.");
       console.log("Add task");
-      const projectID = event.target.parentNode.getAttribute("data-project-id");
       const addNewTaskDialog = document.querySelector(".add-task-dialog");
       addNewTaskDialog.showModal();
       const addTaskSubmitButton = document.querySelector(
@@ -179,17 +187,13 @@ const DOMTodoList = (() => {
         const dueDateValue = document.querySelector("#task-due-date").value;
         const priorityValue = document.querySelector("#task-priority").value;
         const notesValue = document.querySelector("#task-notes").value;
+        const projectID = document
+          .querySelector(".projects-item.selected")
+          .getAttribute("data-project-id");
         if (titleValue && descriptionValue && dueDateValue && notesValue) {
-          console.log("Adding...");
           const form = addNewTaskDialog.querySelector("form");
           form.reset();
           addNewTaskDialog.close();
-          console.log("Project ID: ", projectID);
-          console.log("Title: ", titleValue);
-          console.log("Description: ", descriptionValue);
-          console.log("Due date: ", dueDateValue);
-          console.log("Priority: ", priorityValue);
-          console.log("Notes: ", notesValue);
           const newTask = new Task(
             titleValue,
             descriptionValue,
@@ -197,6 +201,7 @@ const DOMTodoList = (() => {
             priorityValue,
             notesValue
           );
+          console.log(projectID);
           Control.addTaskToProject(projectID, newTask);
           drawAllProjects(Control.getStorage());
         }
