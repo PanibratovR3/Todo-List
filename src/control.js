@@ -48,6 +48,16 @@ const Control = (() => {
     currentStorage[projectIndex].tasks[taskIndex].isCompleted = newState;
     uploadToLocalStorage(currentStorage);
   };
+  const deleteTaskFromProject = (projectID, taskID) => {
+    const projectIndex = currentStorage.findIndex(
+      (project) => project.id === projectID
+    );
+    const taskIndex = currentStorage[projectIndex].tasks.findIndex(
+      (task) => task.id === taskID
+    );
+    currentStorage[projectIndex].tasks.splice(taskIndex, 1);
+    uploadToLocalStorage(currentStorage);
+  };
   return {
     addProjectToStorage,
     getStorage,
@@ -55,6 +65,7 @@ const Control = (() => {
     deleteProject,
     addTaskToProject,
     setCompleteStateOfTask,
+    deleteTaskFromProject,
   };
 })();
 

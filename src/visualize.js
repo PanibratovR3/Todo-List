@@ -148,6 +148,7 @@ const DOMTodoList = (() => {
         taskButtonDelete.classList.add("task-button");
         taskButtonDelete.classList.add("delete");
         taskButtonDelete.textContent = "Delete";
+        taskButtonDelete.addEventListener("click", deleteTaskHandler);
         taskControlRow.appendChild(taskButtonDelete);
         taskElement.appendChild(taskControlRow);
 
@@ -214,6 +215,14 @@ const DOMTodoList = (() => {
     const taskID = taskElement.getAttribute("data-task-id");
     const projectID = document.querySelector("input[type='hidden']").value;
     Control.setCompleteStateOfTask(projectID, taskID, completeStatusFlag);
+    drawAllProjects(Control.getStorage());
+  };
+  const deleteTaskHandler = (event) => {
+    const controlRow = event.target.parentNode;
+    const taskElement = controlRow.parentNode;
+    const taskID = taskElement.getAttribute("data-task-id");
+    const projectID = document.querySelector("input[type='hidden']").value;
+    Control.deleteTaskFromProject(projectID, taskID);
     drawAllProjects(Control.getStorage());
   };
   return { drawAllProjects };
