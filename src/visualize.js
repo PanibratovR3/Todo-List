@@ -28,10 +28,7 @@ const DOMTodoList = (() => {
       addTaskButton.classList.add("project-control");
       addTaskButton.classList.add("add-task");
       addTaskButton.textContent = "Add task";
-      addTaskButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        console.log("Add task");
-      });
+      addTaskButton.addEventListener("click", addTaskHandler);
       projectElement.appendChild(addTaskButton);
 
       const deleteProjectButton = document.createElement("button");
@@ -48,14 +45,44 @@ const DOMTodoList = (() => {
   };
   const selectHandler = (event) => {
     const projectID = event.target.getAttribute("data-project-id");
-    Control.setSelectedStateOfProject(projectID);
-    drawAllProjects(Control.getStorage());
+    if (!event.target.classList.contains("selected")) {
+      Control.setSelectedStateOfProject(projectID);
+      drawAllProjects(Control.getStorage());
+    }
   };
   const deleteHandler = (event) => {
     event.stopPropagation();
     const projectID = event.target.parentNode.getAttribute("data-project-id");
     Control.deleteProject(projectID);
     drawAllProjects(Control.getStorage());
+  };
+  const addTaskHandler = (event) => {
+    event.stopPropagation();
+    if (event.target.parentNode.classList.contains("selected")) {
+      console.log("Can add.");
+      console.log("Add task");
+      const addNewTaskDialog = document.querySelector(".add-task-dialog");
+      addNewTaskDialog.showModal();
+      const addTaskSubmitButton = document.querySelector(
+        ".add-task-submit-button"
+      );
+      addTaskSubmitButton.addEventListener("click", (event) => {
+        const descriptionValue = document.querySelector("#task-name").value;
+        const dueDateValue = document.querySelector("#task-due-date").value;
+        const priorityValue = document.querySelector("#task-priority").value;
+        const notesValue = document.querySelector("#task-notes").value;
+        if (descriptionValue && dueDateValue && notesValue) {
+          console.log("Adding...");
+          const form = addNewTaskDialog.querySelector("form");
+          form.reset();
+          addNewTaskDialog.close();
+        }
+        console.log("Description: ", descriptionValue);
+        console.log("Due date: ", dueDateValue);
+        console.log("Priority: ", priorityValue);
+        console.log("Notes: ", notesValue);
+      });
+    }
   };
   return { drawAllProjects };
 })();
