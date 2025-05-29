@@ -1,6 +1,8 @@
 import { Control } from "./control.js";
 import { Task } from "./task.js";
 import { Project } from "./project.js";
+import "./style.css";
+
 const DOMTodoList = (() => {
   const intitialDraw = () => {
     const header = document.createElement("div");
