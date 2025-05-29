@@ -319,14 +319,3 @@ input:required ~ .add-project-monitor::after {
     padding: 5px 10px;
     background-color:turquoise;
 }
-
-.modal-dialog-update-task-container {
-    position: relative;
-}
-
-.update-task-dialog {
-    background-color:darkseagreen;
-    top: 30%;
-    left: 45%;
-    padding: 20px;
-}
