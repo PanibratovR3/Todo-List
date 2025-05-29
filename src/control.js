@@ -58,21 +58,6 @@ const Control = (() => {
     currentStorage[projectIndex].tasks.splice(taskIndex, 1);
     uploadToLocalStorage(currentStorage);
   };
-  const getTaskInfo = (projectID, taskID) => {
-    const projectIndex = currentStorage.findIndex(
-      (project) => project.id === projectID
-    );
-    const taskIndex = currentStorage[projectIndex].tasks.findIndex(
-      (task) => task.id === taskID
-    );
-    return [
-      currentStorage[projectIndex].tasks[taskIndex].title,
-      currentStorage[projectIndex].tasks[taskIndex].description,
-      currentStorage[projectIndex].tasks[taskIndex].dueDate,
-      currentStorage[projectIndex].tasks[taskIndex].priority,
-      currentStorage[projectIndex].tasks[taskIndex].notes,
-    ];
-  };
   return {
     addProjectToStorage,
     getStorage,
@@ -81,7 +66,6 @@ const Control = (() => {
     addTaskToProject,
     setCompleteStateOfTask,
     deleteTaskFromProject,
-    getTaskInfo,
   };
 })();
 
