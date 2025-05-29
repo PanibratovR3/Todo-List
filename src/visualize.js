@@ -243,12 +243,37 @@ const DOMTodoList = (() => {
     drawAllProjects(Control.getStorage());
   };
   const updateTaskHandler = (event) => {
-    drawUpdateTaskDialog();
+    const taskSetting = event.target.parentNode;
+    const taskItem = taskSetting.parentNode;
+    const taskID = taskItem.getAttribute("data-task-id");
+    const projectID = document.querySelector("input[type='hidden']").value;
+    console.log("Task ID: ", taskID);
+    console.log("Project ID: ", projectID);
+    let [oldTitle, oldDescription, oldDueDate, oldPriority, oldNotes] =
+      Control.getTaskInfo(projectID, taskID);
+    console.log(oldTitle);
+    console.log(oldDescription);
+    console.log(oldDueDate);
+    console.log(oldPriority);
+    console.log(oldNotes);
+    drawUpdateTaskDialog(
+      oldTitle,
+      oldDescription,
+      oldDueDate,
+      oldPriority,
+      oldNotes
+    );
     const updateTaskDialog = document.querySelector(".update-task-dialog");
     updateTaskDialog.showModal();
     // console.log("Update task.");
   };
-  const drawUpdateTaskDialog = () => {
+  const drawUpdateTaskDialog = (
+    oldTitle,
+    oldDescription,
+    oldDueDate,
+    oldPriority,
+    oldNotes
+  ) => {
     const priorities = ["low", "medium", "high"];
     const modalDialogUpdateTaskContainer = document.createElement("div");
     modalDialogUpdateTaskContainer.classList.add(
@@ -273,6 +298,7 @@ const DOMTodoList = (() => {
     const updateTitleField = document.createElement("input");
     updateTitleField.id = "update-task-title";
     updateTitleField.required = true;
+    updateTitleField.value = oldTitle;
     updateTitleRow.appendChild(updateTitleField);
     const titleNonEmptyFlag = document.createElement("span");
     titleNonEmptyFlag.classList.add("non-empty-flag");
@@ -293,6 +319,7 @@ const DOMTodoList = (() => {
     const updateDescriptionField = document.createElement("input");
     updateDescriptionField.id = "update-description-title";
     updateDescriptionField.required = true;
+    updateDescriptionField.value = oldDescription;
     updateDescriptionRow.appendChild(updateDescriptionField);
     const descriptionNonEmptyFlag = document.createElement("span");
     descriptionNonEmptyFlag.classList.add("non-empty-flag");
@@ -314,6 +341,7 @@ const DOMTodoList = (() => {
     updateDueDateField.id = "update-task-due-date";
     updateDueDateField.type = "date";
     updateDueDateField.required = true;
+    updateDueDateField.value = oldDueDate;
     updateDueDateRow.appendChild(updateDueDateField);
     const dueDateNonEmptyFlag = document.createElement("span");
     dueDateNonEmptyFlag.classList.add("non-empty-flag");
@@ -334,12 +362,19 @@ const DOMTodoList = (() => {
     const updatePriorityField = document.createElement("select");
     updatePriorityField.id = "update-task-priority";
     updatePriorityField.required = true;
+    const oldPriorityOption = document.createElement("option");
+    oldPriorityOption.value = oldPriority;
+    oldPriorityOption.textContent =
+      oldPriority[0].toUpperCase() + oldPriority.slice(1);
+    updatePriorityField.appendChild(oldPriorityOption);
     for (const priority of priorities) {
-      const priorityOption = document.createElement("option");
-      priorityOption.value = priority;
-      priorityOption.textContent =
-        priority[0].toUpperCase() + priority.slice(1);
-      updatePriorityField.appendChild(priorityOption);
+      if (priority !== oldPriority) {
+        const priorityOption = document.createElement("option");
+        priorityOption.value = priority;
+        priorityOption.textContent =
+          priority[0].toUpperCase() + priority.slice(1);
+        updatePriorityField.appendChild(priorityOption);
+      }
     }
     updatePriorityRow.appendChild(updatePriorityField);
     const updatePriorityMonitor = document.createElement("span");
@@ -358,6 +393,7 @@ const DOMTodoList = (() => {
     const updateNotesField = document.createElement("textarea");
     updateNotesField.id = "update-task-notes";
     updateNotesField.required = true;
+    updateNotesField.textContent = oldNotes;
     updateNotesRow.appendChild(updateNotesField);
     const notesNonEmptyFlag = document.createElement("span");
     notesNonEmptyFlag.classList.add("non-empty-flag");
