@@ -1,5 +1,4 @@
 import { Control } from "./control.js";
-import { Project } from "./project.js";
 import { DOMTodoList } from "./visualize.js";
 
 DOMTodoList.intitialDraw();
