@@ -14,12 +14,12 @@ module.exports = {
     watchFiles: ".src/template.html",
   },
   plugins: [new HtmlWebpackPlugin({ template: "./src/template.html" })],
-  //   module: {
-  //     rules: [
-  //       {
-  //         test: /\.css$/i,
-  //         use: ["style-loader", "css-loader"],
-  //       },
-  //     ],
-  //   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
