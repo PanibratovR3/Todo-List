@@ -150,6 +150,12 @@ const DOMTodoList = (() => {
         taskButtonDelete.textContent = "Delete";
         taskButtonDelete.addEventListener("click", deleteTaskHandler);
         taskControlRow.appendChild(taskButtonDelete);
+        const taskButtonUpdate = document.createElement("button");
+        taskButtonUpdate.classList.add("task-button");
+        taskButtonUpdate.classList.add("update");
+        taskButtonUpdate.textContent = "Update";
+        taskButtonUpdate.addEventListener("click", updateTaskHandler);
+        taskControlRow.appendChild(taskButtonUpdate);
         taskElement.appendChild(taskControlRow);
 
         return taskElement;
@@ -235,6 +241,147 @@ const DOMTodoList = (() => {
     const projectID = document.querySelector("input[type='hidden']").value;
     Control.deleteTaskFromProject(projectID, taskID);
     drawAllProjects(Control.getStorage());
+  };
+  const updateTaskHandler = (event) => {
+    drawUpdateTaskDialog();
+    const updateTaskDialog = document.querySelector(".update-task-dialog");
+    updateTaskDialog.showModal();
+    // console.log("Update task.");
+  };
+  const drawUpdateTaskDialog = () => {
+    const priorities = ["low", "medium", "high"];
+    const modalDialogUpdateTaskContainer = document.createElement("div");
+    modalDialogUpdateTaskContainer.classList.add(
+      "modal-dialog-update-task-container"
+    );
+    const updateTaskDialog = document.createElement("dialog");
+    updateTaskDialog.classList.add("update-task-dialog");
+    const updateTaskHeader = document.createElement("div");
+    updateTaskHeader.classList.add("add-project-header");
+    updateTaskHeader.textContent = "Update task";
+    updateTaskDialog.appendChild(updateTaskHeader);
+    const formDialog = document.createElement("form");
+    formDialog.method = "dialog";
+
+    //Title
+    const updateTitleRow = document.createElement("div");
+    updateTitleRow.classList.add("add-task-row");
+    const titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for", "update-task-title");
+    titleLabel.textContent = "Title:";
+    updateTitleRow.appendChild(titleLabel);
+    const updateTitleField = document.createElement("input");
+    updateTitleField.id = "update-task-title";
+    updateTitleField.required = true;
+    updateTitleRow.appendChild(updateTitleField);
+    const titleNonEmptyFlag = document.createElement("span");
+    titleNonEmptyFlag.classList.add("non-empty-flag");
+    updateTitleRow.appendChild(titleNonEmptyFlag);
+    const updateTitleMonitor = document.createElement("span");
+    updateTitleMonitor.classList.add("add-task-monitor");
+    updateTitleRow.appendChild(updateTitleMonitor);
+    formDialog.appendChild(updateTitleRow);
+
+    //Description
+
+    const updateDescriptionRow = document.createElement("div");
+    updateDescriptionRow.classList.add("add-task-row");
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "update-description-title");
+    descriptionLabel.textContent = "Descrip-\ntion:";
+    updateDescriptionRow.appendChild(descriptionLabel);
+    const updateDescriptionField = document.createElement("input");
+    updateDescriptionField.id = "update-description-title";
+    updateDescriptionField.required = true;
+    updateDescriptionRow.appendChild(updateDescriptionField);
+    const descriptionNonEmptyFlag = document.createElement("span");
+    descriptionNonEmptyFlag.classList.add("non-empty-flag");
+    updateDescriptionRow.appendChild(descriptionNonEmptyFlag);
+    const updateDescriptionMonitor = document.createElement("span");
+    updateDescriptionMonitor.classList.add("add-task-monitor");
+    updateDescriptionRow.appendChild(updateDescriptionMonitor);
+    formDialog.appendChild(updateDescriptionRow);
+
+    // Due date
+
+    const updateDueDateRow = document.createElement("div");
+    updateDueDateRow.classList.add("add-task-row");
+    const dueDateLabel = document.createElement("label");
+    dueDateLabel.setAttribute("for", "update-task-due-date");
+    dueDateLabel.textContent = "Due date:";
+    updateDueDateRow.appendChild(dueDateLabel);
+    const updateDueDateField = document.createElement("input");
+    updateDueDateField.id = "update-task-due-date";
+    updateDueDateField.type = "date";
+    updateDueDateField.required = true;
+    updateDueDateRow.appendChild(updateDueDateField);
+    const dueDateNonEmptyFlag = document.createElement("span");
+    dueDateNonEmptyFlag.classList.add("non-empty-flag");
+    updateDueDateRow.appendChild(dueDateNonEmptyFlag);
+    const updateDueDateMonitor = document.createElement("span");
+    updateDueDateMonitor.classList.add("add-task-monitor");
+    updateDueDateRow.appendChild(updateDueDateMonitor);
+    formDialog.appendChild(updateDueDateRow);
+
+    //Priority
+
+    const updatePriorityRow = document.createElement("div");
+    updatePriorityRow.classList.add("add-task-row");
+    const priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "update-task-priority");
+    priorityLabel.textContent = "Priority:";
+    updatePriorityRow.appendChild(priorityLabel);
+    const updatePriorityField = document.createElement("select");
+    updatePriorityField.id = "update-task-priority";
+    updatePriorityField.required = true;
+    for (const priority of priorities) {
+      const priorityOption = document.createElement("option");
+      priorityOption.value = priority;
+      priorityOption.textContent =
+        priority[0].toUpperCase() + priority.slice(1);
+      updatePriorityField.appendChild(priorityOption);
+    }
+    updatePriorityRow.appendChild(updatePriorityField);
+    const updatePriorityMonitor = document.createElement("span");
+    updatePriorityMonitor.classList.add("add-task-monitor");
+    updatePriorityRow.appendChild(updatePriorityMonitor);
+    formDialog.appendChild(updatePriorityRow);
+
+    // Notes
+
+    const updateNotesRow = document.createElement("div");
+    updateNotesRow.classList.add("add-task-row");
+    const notesLabel = document.createElement("label");
+    notesLabel.setAttribute("for", "update-task-notes");
+    notesLabel.textContent = "Notes:";
+    updateNotesRow.appendChild(notesLabel);
+    const updateNotesField = document.createElement("textarea");
+    updateNotesField.id = "update-task-notes";
+    updateNotesField.required = true;
+    updateNotesRow.appendChild(updateNotesField);
+    const notesNonEmptyFlag = document.createElement("span");
+    notesNonEmptyFlag.classList.add("non-empty-flag");
+    updateNotesRow.appendChild(descriptionNonEmptyFlag);
+    const updateNotesMonitor = document.createElement("span");
+    updateNotesMonitor.classList.add("add-task-monitor");
+    updateNotesRow.appendChild(updateNotesMonitor);
+    formDialog.appendChild(updateNotesRow);
+
+    // Settings
+
+    const updateSettingsRow = document.createElement("div");
+    updateSettingsRow.classList.add("add-task-settings");
+    const updateSubmitButton = document.createElement("button");
+    updateSubmitButton.type = "button";
+    updateSubmitButton.classList.add("add-task-submit-button");
+    updateSubmitButton.classList.add("update-task-button");
+    updateSubmitButton.textContent = "Update";
+    updateSettingsRow.appendChild(updateSubmitButton);
+    formDialog.appendChild(updateSettingsRow);
+
+    updateTaskDialog.appendChild(formDialog);
+    modalDialogUpdateTaskContainer.appendChild(updateTaskDialog);
+    document.body.appendChild(modalDialogUpdateTaskContainer);
   };
   return { drawAllProjects };
 })();

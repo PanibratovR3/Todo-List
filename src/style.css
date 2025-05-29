@@ -268,7 +268,6 @@ textarea:valid + .non-empty-flag::after {
 
 .add-task-row input, select, textarea {
     flex: 4;
-    /* field-sizing: content; */
 }
 
 input[type="date"] {
@@ -319,4 +318,15 @@ input:required ~ .add-project-monitor::after {
     font-size: 1.1rem;
     padding: 5px 10px;
     background-color:turquoise;
+}
+
+.modal-dialog-update-task-container {
+    position: relative;
+}
+
+.update-task-dialog {
+    background-color:darkseagreen;
+    top: 30%;
+    left: 45%;
+    padding: 20px;
 }
