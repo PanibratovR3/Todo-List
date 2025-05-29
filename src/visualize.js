@@ -419,8 +419,6 @@ const DOMTodoList = (() => {
   const addTaskHandler = (event) => {
     event.stopPropagation();
     if (event.target.parentNode.classList.contains("selected")) {
-      console.log("Can add.");
-      console.log("Add task");
       const addNewTaskDialog = document.querySelector(".add-task-dialog");
       addNewTaskDialog.showModal();
       const addTaskSubmitButton = document.querySelector(
@@ -446,7 +444,6 @@ const DOMTodoList = (() => {
             priorityValue,
             notesValue
           );
-          console.log(projectID);
           Control.addTaskToProject(projectID, newTask);
           drawAllProjects(Control.getStorage());
         }
